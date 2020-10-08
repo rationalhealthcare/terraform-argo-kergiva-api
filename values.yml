@@ -37,17 +37,17 @@ deployments:
 volumes:
   - name: nginx-config
     configMap:
-      name: site-configmap
+      name: kergiva-org-api-site-configmap
   - name: site-config
     configMap:
-      name: site-configmap
+      name: kergiva-org-api-site-configmap
   - name: cache-volume
     emptyDir: {}
   - name: run-volume
     emptyDir: {}
   - name: database-config
     configMap:
-      name: database-configmap
+      name: kergiva-org-api-database-configmap
 nodeSelector: {}
 tolerations: []
 affinity: {}
