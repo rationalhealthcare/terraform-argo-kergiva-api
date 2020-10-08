@@ -23,7 +23,7 @@ variable "namespace" {
 }
 variable "name" {
   type    = string
-  default = "kergiva-web"
+  default = "kergiva-api"
 }
 variable "chart_repo_url" {
   type    = string
