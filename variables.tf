@@ -58,4 +58,5 @@ variable "image_pull_secret" {
 }
 variable "labels" {
   type = map(string)
+  default = {}
 }
