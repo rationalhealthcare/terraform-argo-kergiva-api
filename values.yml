@@ -1,0 +1,53 @@
+accounts: []
+deployments:
+  - name: kergiva-org-api
+    replicas: ${replicas}
+    image:
+      repo: ${image_repo}/${image_name}
+      tag: ${image_tag}
+      pull_poicy: Always
+      pull_secret: ${image_pull_secret}
+    security:
+      read_only_root_filesystem: true
+      run_as_non_root: true
+      run_as_user: 1000
+      run_as_group: 1000
+      drop_all_capabilities: true
+      pod_fs_group: 1000
+    resources:
+      limits:
+        cpu: 100m
+        memory: 128Mi
+      requests:
+        cpu: 100m
+        memory: 128Mi
+    probes:
+      liveness:
+        path: /
+        port: 5000
+      readiness:
+        path: /
+        port: 5000
+    volume_mounts:
+      database-config: /app/config/
+    endpoints:
+      - name: ${service_name}
+        container_port: ${service_port}
+        protocol: ${service_protocol}
+volumes:
+  - name: nginx-config
+    configMap:
+      name: site-configmap
+  - name: site-config
+    configMap:
+      name: site-configmap
+  - name: cache-volume
+    emptyDir: {}
+  - name: run-volume
+    emptyDir: {}
+  - name: database-config
+    configMap:
+      name: database-configmap
+nodeSelector: {}
+tolerations: []
+affinity: {}
