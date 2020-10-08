@@ -35,7 +35,7 @@ variable "chart_name" {
 }
 variable "chart_version" {
   type    = string
-  default = "0.1.2"
+  default = "0.1.3"
 }
 variable "replicas" {
   type = number
