@@ -38,5 +38,5 @@ module "kergiva_api" {
       ]
     }
   ]
-  labels = {}
+  labels = local.labels
 }

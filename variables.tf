@@ -56,3 +56,6 @@ variable "image_tag" {
 variable "image_pull_secret" {
   type = string
 }
+variable "labels" {
+  type = map(string)
+}
