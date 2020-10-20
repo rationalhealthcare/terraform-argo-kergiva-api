@@ -1,3 +1,16 @@
+variable "database_uri" {
+  type = string
+}
+variable "database_username" {
+  type = string
+}
+variable "database_password" {
+  type = string
+}
+variable "database_name" {
+  type = string
+}
+
 variable "cluster_endpoint" {
   type = string
 }
@@ -38,25 +51,25 @@ variable "chart_version" {
   default = "0.1.3"
 }
 variable "replicas" {
-  type = number
+  type    = number
   default = 1
 }
 variable "image_repo" {
-  type = string
+  type    = string
   default = "docker.pkg.github.com"
 }
 variable "image_name" {
-  type = string
+  type    = string
   default = "rationalhealthcare/myapi/kergiva-api"
 }
 variable "image_tag" {
-  type = string
+  type    = string
   default = "latest"
 }
 variable "image_pull_secret" {
   type = string
 }
 variable "labels" {
-  type = map(string)
+  type    = map(string)
   default = {}
 }

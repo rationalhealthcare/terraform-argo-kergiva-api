@@ -1,3 +1,36 @@
+# This will ensure that a change to the database connection info will trigger the creation of a new configmap...
+# which will require an update in the deployment which Argo will be looking for.
+resource "random_id" "database" {
+  keepers = {
+    database_uri      = var.database_uri
+    database_username = var.database_username
+    database_password = var.database_password
+    database_name     = var.database_name
+  }
+  byte_length = 4
+}
+
+resource "kubernetes_secret" "kergiva_db_connection_info" {
+  metadata {
+    name = "kergiva-org-database-secret-${random_id.database.id}"
+    labels = {
+      "app.kubernetes.io/name"       = "kergiva-api"
+      "app.kubernetes.io/instance"   = "kergiva-api"
+      "app.kubernetes.io/tier"       = "api"
+      "app.kubernetes.io/part-of"    = "kergiva-org"
+      "app.kubernetes.io/managed-by" = "terraform"
+      "app.kubernetes.io/component"  = "kubernetes-configmap"
+    }
+  }
+  data = {
+    "kergiva_db.yml" = {
+      "uri"      = random_id.database.keepers.database_uri
+      "username" = random_id.database.keepers.database_username
+      "password" = random_id.database.keepers.database_password
+      "database" = random_id.database.keepers.database_name
+    }
+  }
+}
 
 module "kergiva_api" {
   source = "github.com/turnbros/terraform-octal-http-application"
@@ -18,14 +51,15 @@ module "kergiva_api" {
   automated_self_heal     = local.automated_self_heal
   automated_prune         = local.automated_prune
   helm_values = yamldecode(templatefile("${path.module}/values.yml", {
-    replicas = var.replicas
-    image_repo = var.image_repo
-    image_name = var.image_name
-    image_tag = var.image_tag
-    image_pull_secret= var.image_pull_secret
-    service_name     = local.service_name
-    service_port     = local.service_port
-    service_protocol = local.service_protocol
+    replicas               = var.replicas
+    image_repo             = var.image_repo
+    image_name             = var.image_name
+    image_tag              = var.image_tag
+    image_pull_secret      = var.image_pull_secret
+    database_config_secret = kubernetes_secret.kergiva_db_connection_info.metadata.0.name
+    service_name           = local.service_name
+    service_port           = local.service_port
+    service_protocol       = local.service_protocol
   }))
   route_rules = [
     {

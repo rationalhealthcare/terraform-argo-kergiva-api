@@ -46,8 +46,8 @@ volumes:
   - name: run-volume
     emptyDir: {}
   - name: database-config
-    configMap:
-      name: kergiva-org-api-database-configmap
+    secret:
+      secretName: ${database_config_secret}
 nodeSelector: {}
 tolerations: []
 affinity: {}
