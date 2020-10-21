@@ -23,12 +23,12 @@ resource "kubernetes_secret" "kergiva_db_connection_info" {
     }
   }
   data = {
-    "kergiva_db.yml" = {
+    "kergiva_db.yml" = yamlencode({
       "uri"      = random_id.database.keepers.database_uri
       "username" = random_id.database.keepers.database_username
       "password" = random_id.database.keepers.database_password
       "database" = random_id.database.keepers.database_name
-    }
+    })
   }
 }
 
