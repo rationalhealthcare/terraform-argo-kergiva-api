@@ -1,5 +1,8 @@
-variable "database_uri" {
+variable "database_host" {
   type = string
+}
+variable "database_port" {
+  type = number
 }
 variable "database_username" {
   type = string

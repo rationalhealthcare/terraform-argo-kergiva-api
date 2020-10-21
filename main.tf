@@ -2,7 +2,8 @@
 # which will require an update in the deployment which Argo will be looking for.
 resource "random_id" "database" {
   keepers = {
-    database_uri      = var.database_uri
+    database_host     = var.database_host
+    database_port     = var.database_port
     database_username = var.database_username
     database_password = var.database_password
     database_name     = var.database_name
@@ -20,7 +21,8 @@ resource "kubernetes_secret" "kergiva_db_connection_info" {
   }
   data = {
     "kergiva_db.yml" = yamlencode({
-      "uri"      = random_id.database.keepers.database_uri
+      "host"     = random_id.database.keepers.database_host
+      "port"     = random_id.database.keepers.database_port
       "username" = random_id.database.keepers.database_username
       "password" = random_id.database.keepers.database_password
       "database" = random_id.database.keepers.database_name
