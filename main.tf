@@ -12,7 +12,7 @@ resource "random_id" "database" {
 
 resource "kubernetes_secret" "kergiva_db_connection_info" {
   metadata {
-    name      = "kergiva-org-database-secret-${random_id.database.id}"
+    name      = "kergiva-org-database-secret-${random_id.database.hex}"
     namespace = var.namespace
     labels = {
       "app.kubernetes.io/name"       = "kergiva-api"
