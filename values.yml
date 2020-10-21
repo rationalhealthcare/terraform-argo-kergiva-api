@@ -8,7 +8,7 @@ deployments:
       pull_poicy: Always
       pull_secret: ${image_pull_secret}
     environment_variables:
-      DB_CONFIG_PATH: "/app/config/kergiva_db.yml"
+      DB_CONFIG_PATH: "/app/secrets/kergiva_db.yml"
     security:
       read_only_root_filesystem: true
       run_as_non_root: true
@@ -31,7 +31,7 @@ deployments:
         path: /
         port: 5000
     volume_mounts:
-      database-config: /app/config/
+      database-config: /app/secrets/
     endpoints:
       - name: ${service_name}
         container_port: ${service_port}
