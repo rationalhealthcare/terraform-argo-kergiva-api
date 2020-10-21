@@ -7,6 +7,8 @@ deployments:
       tag: ${image_tag}
       pull_poicy: Always
       pull_secret: ${image_pull_secret}
+    environment_variables:
+      DB_CONFIG_PATH: "/app/config/kergiva_db.yml"
     security:
       read_only_root_filesystem: true
       run_as_non_root: true
