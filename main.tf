@@ -12,15 +12,15 @@ resource "random_id" "database" {
 
 resource "kubernetes_secret" "kergiva_db_connection_info" {
   metadata {
-    name      = "kergiva-org-database-secret-${random_id.database.hex}"
+    name      = "kergiva-database-secret-${random_id.database.hex}"
     namespace = var.namespace
     labels = {
-      "app.kubernetes.io/name"       = "kergiva-api"
+      "app.kubernetes.io/name"       = "kergiva-database-secret-${random_id.database.hex}"
       "app.kubernetes.io/instance"   = "kergiva-api"
       "app.kubernetes.io/tier"       = "api"
       "app.kubernetes.io/part-of"    = "kergiva-org"
       "app.kubernetes.io/managed-by" = "terraform"
-      "app.kubernetes.io/component"  = "kubernetes-configmap"
+      "app.kubernetes.io/component"  = "kubernetes-secret"
     }
   }
   data = {
