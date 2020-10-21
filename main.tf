@@ -7,7 +7,7 @@ resource "random_id" "database" {
     database_password = var.database_password
     database_name     = var.database_name
   }
-  byte_length = 4
+  byte_length = 2
 }
 
 resource "kubernetes_secret" "kergiva_db_connection_info" {
