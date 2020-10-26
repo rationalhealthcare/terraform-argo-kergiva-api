@@ -61,7 +61,7 @@ module "kergiva_api" {
   }))
   route_rules = [
     {
-      match_rule = "Host(`${var.domain_name}`)"
+      match_rule = "Host(`${var.domain_name}`) && Path(`/api`)"
       services = [
         {
           namespace = var.namespace
