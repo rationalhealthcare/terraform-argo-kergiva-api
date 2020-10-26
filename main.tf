@@ -62,12 +62,7 @@ module "kergiva_api" {
   route_rules = [
     {
       match_rule = "Host(`${var.domain_name}`) && Path(`/api`)"
-      middlewares = [
-        {
-          name = local.ingress_route_middleware.metadata.name,
-          namespace = local.ingress_route_middleware.metadata.namespace
-        }
-      ]
+      middlewares = []
       services = [
         {
           namespace = var.namespace
