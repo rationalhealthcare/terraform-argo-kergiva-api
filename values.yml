@@ -5,7 +5,7 @@ deployments:
     image:
       repo: ${image_repo}/${image_name}
       tag: ${image_tag}
-      pull_poicy: Always
+      pull_policy: Always
       pull_secret: ${image_pull_secret}
     environment_variables:
       DB_CONFIG_PATH: "/app/secrets/kergiva_db.yml"
