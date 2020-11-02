@@ -25,7 +25,7 @@ resource "kubernetes_secret" "kergiva_db_connection_info" {
       "host"     = random_id.database.keepers.database_host
       "port"     = random_id.database.keepers.database_port
       "username" = random_id.database.keepers.database_username
-      "password" = random_id.database.keepers.database_password
+      "password" = var.database_password #random_id.database.keepers.database_password
       "database" = random_id.database.keepers.database_name
     })
   }
