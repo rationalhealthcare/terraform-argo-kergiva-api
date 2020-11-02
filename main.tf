@@ -6,7 +6,7 @@ resource "random_id" "database" {
     database_port     = var.database_port
     database_username = var.database_username
     database_password = var.database_password
-    database_name     = mysql_database.kergiva_api_db.name
+    database_name     = var.database_name
   }
   byte_length = 2
 }
