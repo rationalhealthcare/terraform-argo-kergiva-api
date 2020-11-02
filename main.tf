@@ -12,6 +12,7 @@ resource "random_id" "database" {
 }
 
 resource "kubernetes_secret" "kergiva_db_connection_info" {
+  depends_on = [random_id.database]
   metadata {
     name      = "kergiva-database-secret-${random_id.database.hex}"
     namespace = var.namespace
