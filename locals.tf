@@ -1,4 +1,7 @@
 locals {
+
+  instance_name = "${var.name}-${var.environment}"
+
   automated_self_heal = true
   automated_prune     = true
   service_name        = "kergiva-api"

@@ -10,9 +10,6 @@ variable "database_username" {
 variable "database_password" {
   type = string
 }
-variable "database_name" {
-  type = string
-}
 
 variable "cluster_endpoint" {
   type = string
@@ -40,6 +37,9 @@ variable "namespace" {
 variable "name" {
   type    = string
   default = "kergiva-api"
+}
+variable "environment" {
+  type = string
 }
 variable "chart_repo_url" {
   type    = string
