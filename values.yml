@@ -21,8 +21,8 @@ deployments:
         cpu: 100m
         memory: 128Mi
       requests:
-        cpu: 100m
-        memory: 128Mi
+        cpu: 50m
+        memory: 32Mi
     probes:
       liveness:
         path: /
